@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luxembourg Investment Vehicles</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #0a2342;
@@ -130,9 +130,9 @@
   }
   .vehicle-code {
     display: inline-block;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Nunito', sans-serif;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--blue);
     background: var(--sky-light);
     border-radius: 3px;
@@ -264,9 +264,9 @@
   .card-header:hover { background: var(--bg); }
   .card-header-left { display: flex; align-items: center; gap: 10px; }
   .card-code {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Nunito', sans-serif;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--blue);
     background: var(--sky-light);
     border-radius: 4px;
@@ -408,17 +408,17 @@
     <tr class="vehicle-row">
       <th class="row-label-header">Vehicle</th>
       <th><div class="vehicle-code">UCITS</div><br>Undertaking for Collective Investments in Transferable Securities</th>
-      <th><div class="vehicle-code">UCI II</div><br>Non-EU UCITS</th>
+      <th><div class="vehicle-code">UCI Part II</div><br>Alternative Investment Fund</th>
       <th><div class="vehicle-code">SIF</div><br>Specialised Investment Fund</th>
       <th><div class="vehicle-code">SICAR</div><br>Société d'Investissement en Capital à Risque</th>
       <th><div class="vehicle-code">RAIF</div><br>Reserved Alternative Investment Fund</th>
       <th><div class="vehicle-code">SCS / SCSp</div><br>Limited Partnership (incl. special limited partnerships)</th>
       <th><div class="vehicle-code">IORP</div><br>Pension Fund Vehicle</th>
       <th class="mp-first"><div class="vehicle-code mp-code">SOPARFI</div><br>Financial Holding Company</th>
-      <th><div class="vehicle-code mp-code">Sec.</div><br>Securitisation Vehicle &amp; Fund</th>
-      <th><div class="vehicle-code mp-code">Fid.</div><br>Fiduciary Contracts</th>
+      <th>Securitisation Vehicle &amp; Fund</th>
+      <th>Fiduciary Contracts</th>
       <th><div class="vehicle-code mp-code">SPF</div><br>Family Wealth Management Company</th>
-      <th><div class="vehicle-code mp-code">LI</div><br>Life Insurance Contracts</th>
+      <th>Life Insurance Contracts</th>
     </tr>
   </thead>
   <tbody>
@@ -512,8 +512,8 @@
   <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
-        <span class="card-code">UCI II</span>
-        <div><div class="card-title">UCI Part II</div><div class="card-subtitle">Non-EU UCITS</div></div>
+        <span class="card-code">UCI Part II</span>
+        <div><div class="card-title">UCI Part II</div><div class="card-subtitle">Alternative Investment Fund</div></div>
       </div>
       <span class="card-chevron">▾</span>
     </div>
@@ -633,7 +633,7 @@
   <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
-        <span class="card-code mp">Sec.</span>
+        <span class="card-code mp">Securitisation</span>
         <div><div class="card-title">Securitisation Vehicle &amp; Fund</div><div class="card-subtitle">Vehicle &amp; Fund</div></div>
       </div>
       <span class="card-chevron">▾</span>
@@ -650,7 +650,7 @@
   <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
-        <span class="card-code mp">Fid.</span>
+        <span class="card-code mp">Fiduciary</span>
         <div><div class="card-title">Fiduciary Contracts</div><div class="card-subtitle">Fiduciary vehicle</div></div>
       </div>
       <span class="card-chevron">▾</span>
@@ -684,7 +684,7 @@
   <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
-        <span class="card-code mp">LI</span>
+        <span class="card-code mp">Life Insurance</span>
         <div><div class="card-title">Life Insurance Contracts</div><div class="card-subtitle">Insurance-based vehicle</div></div>
       </div>
       <span class="card-chevron">▾</span>
