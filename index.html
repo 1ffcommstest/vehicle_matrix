@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxembourg Investment Vehicles</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a2342;
+    --blue: #1a6faf;
+    --sky: #3eb0e0;
+    --sky-light: #d0eef9;
+    --accent: #00b4d8;
+    --green: #2a9d8f;
+    --warm: #e9c46a;
+    --border: #d0dce8;
+    --bg: #DCE8F5;
+    --white: #ffffff;
+    --text: #1a2b3c;
+    --text-muted: #5a7080;
+    --row-alt: #edf4f9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--navy);
+    padding: 20px 24px 16px;
+    border-bottom: 3px solid var(--sky);
+  }
+  .page-header h1 {
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .page-header p {
+    color: var(--sky-light);
+    font-size: 11px;
+    margin-top: 3px;
+    opacity: 0.85;
+  }
+
+  /* ── GROUP LEGEND ── */
+  .group-legend {
+    display: flex;
+    gap: 16px;
+    padding: 10px 24px;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(10,35,66,0.1);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 2px;
+  }
+  .legend-dot.am { background: var(--sky); }
+  .legend-dot.mp { background: var(--warm); }
+
+  /* ═══════════════════════════════
+     DESKTOP TABLE
+  ═══════════════════════════════ */
+  .desktop-view { display: block; }
+  .mobile-view  { display: none; }
+
+  .table-wrapper {
+    overflow-x: auto;
+    padding: 16px 24px 24px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  /* Column header row */
+  thead tr.group-row th {
+    padding: 0;
+    border: none;
+  }
+  .group-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .group-am { background: var(--blue); }
+  .group-mp { background: #8a6a1a; }
+  .group-spacer { background: transparent; width: 140px; }
+
+  thead tr.vehicle-row th {
+    padding: 8px 6px 6px;
+    text-align: center;
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--border);
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+    min-width: 72px;
+  }
+  thead tr.vehicle-row th.row-label-header {
+    text-align: left;
+    width: 140px;
+    min-width: 140px;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .vehicle-code {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blue);
+    background: var(--sky-light);
+    border-radius: 3px;
+    padding: 1px 4px;
+    margin-bottom: 3px;
+  }
+  .vehicle-code.mp-code {
+    color: #8a6a1a;
+    background: #fef5d0;
+  }
+
+  /* Section divider rows */
+  tr.section-header td {
+    background: var(--navy);
+    color: var(--sky-light);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    border: none;
+  }
+
+  /* Data rows */
+  tbody tr.data-row {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr.data-row:hover { background: var(--sky-light); }
+  tbody tr.data-row:nth-child(even) { background: var(--row-alt); }
+  tbody tr.data-row:nth-child(even):hover { background: var(--sky-light); }
+
+  td.row-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue);
+    padding: 9px 8px 9px 0;
+    white-space: nowrap;
+    vertical-align: top;
+    width: 140px;
+  }
+
+  td.cell {
+    text-align: center;
+    padding: 8px 4px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: var(--text);
+    border-left: 1px solid var(--border);
+  }
+  td.cell.am-group { border-left-color: #c5dff0; }
+  td.cell.mp-group { border-left-color: #e8d9a0; }
+
+  /* Tick/check marks */
+  .tick { color: var(--blue); font-size: 13px; font-weight: 700; }
+  .tick.triple { letter-spacing: -3px; }
+  .tick.double { letter-spacing: -3px; }
+  .dot { 
+    display: inline-block;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--sky);
+    vertical-align: middle;
+  }
+  .dot.mp { background: var(--warm); }
+  .star { color: var(--text-muted); font-size: 12px; }
+  .text-cell { font-size: 10px; color: var(--text); line-height: 1.3; }
+  .text-cell.small { font-size: 9.5px; color: var(--text-muted); }
+  .empty { color: var(--border); font-size: 10px; }
+
+  /* MP group separator line */
+  td.mp-first, th.mp-first { border-left: 3px solid var(--warm) !important; }
+
+  /* Industries section */
+  tr.industry-row td.row-label {
+    font-weight: 500;
+    color: var(--text);
+    font-size: 11px;
+  }
+
+  /* ═══════════════════════════════
+     MOBILE CARDS
+  ═══════════════════════════════ */
+  @media (max-width: 768px) {
+    .desktop-view { display: none; }
+    .mobile-view  { display: block; }
+    .group-legend { flex-wrap: wrap; gap: 10px; padding: 10px 16px; }
+    .page-header { padding: 16px; }
+  }
+
+  .mobile-view {
+    padding: 12px 16px 24px;
+  }
+
+  .mobile-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 0 8px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .mobile-group-title.am { color: var(--blue); }
+  .mobile-group-title.mp { color: #8a6a1a; }
+
+  .vehicle-card {
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(10,35,66,0.06);
+  }
+  .vehicle-card.mp { border-left: 3px solid var(--warm); }
+  .vehicle-card.am { border-left: 3px solid var(--sky); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--white);
+    transition: background 0.15s;
+  }
+  .card-header:hover { background: var(--bg); }
+  .card-header-left { display: flex; align-items: center; gap: 10px; }
+  .card-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--blue);
+    background: var(--sky-light);
+    border-radius: 4px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .card-code.mp { color: #8a6a1a; background: #fef5d0; }
+  .card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .card-subtitle {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .card-chevron {
+    color: var(--text-muted);
+    font-size: 16px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .card-chevron.open { transform: rotate(180deg); }
+
+  .card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+  .card-body.open { display: block; }
+
+  .card-row {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    font-size: 11.5px;
+  }
+  .card-row:last-child { border-bottom: none; }
+  .card-row-label {
+    width: 120px;
+    min-width: 120px;
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 10.5px;
+    padding: 8px 10px 8px 14px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+  }
+  .card-row-value {
+    flex: 1;
+    padding: 8px 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+
+  .card-section-head {
+    background: var(--navy);
+    color: var(--sky-light);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+  }
+
+  .industry-tag {
+    display: inline-block;
+    background: var(--sky-light);
+    color: var(--blue);
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 6px;
+    margin: 1px 2px 1px 0;
+  }
+  .industry-tag.mp { background: #fef5d0; color: #8a6a1a; }
+
+  /* Filter bar (mobile) */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .filter-btn {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .filter-btn.active {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+
+  /* Footer */
+  .page-footer {
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 10px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--white);
+  }
+  .page-footer a { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="group-legend">
+  <div class="legend-item"><div class="legend-dot am"></div> Asset Management Vehicles</div>
+  <div class="legend-item"><div class="legend-dot mp"></div> Multi-Purpose Vehicles</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     DESKTOP TABLE
+══════════════════════════════════════════ -->
+<div class="desktop-view">
+<div class="table-wrapper">
+<table>
+  <thead>
+    <tr class="group-row">
+      <th><div class="group-spacer"></div></th>
+      <th colspan="7"><div class="group-label group-am">Asset management vehicles</div></th>
+      <th colspan="7" class="mp-first"><div class="group-label group-mp">Multi-purpose vehicles</div></th>
+    </tr>
+    <tr class="vehicle-row">
+      <th class="row-label-header">Vehicle</th>
+      <th><div class="vehicle-code">UCITS</div><br>Undertaking for Collective Investments in Transferable Securities</th>
+      <th><div class="vehicle-code">UCI II</div><br>Non-EU UCITS</th>
+      <th><div class="vehicle-code">SIF</div><br>Specialised Investment Fund</th>
+      <th><div class="vehicle-code">SICAR</div><br>Société d'Investissement en Capital à Risque</th>
+      <th><div class="vehicle-code">RAIF</div><br>Reserved Alternative Investment Fund</th>
+      <th><div class="vehicle-code">SCS / SCSp</div><br>Limited Partnership (incl. special limited partnerships)</th>
+      <th><div class="vehicle-code">IORP</div><br>Pension Fund Vehicle</th>
+      <th class="mp-first"><div class="vehicle-code mp-code">SOPARFI</div><br>Financial Holding Company</th>
+      <th><div class="vehicle-code mp-code">Sec.</div><br>Securitisation Vehicle &amp; Fund</th>
+      <th><div class="vehicle-code mp-code">Fid.</div><br>Fiduciary Contracts</th>
+      <th><div class="vehicle-code mp-code">SPF</div><br>Family Wealth Management Company</th>
+      <th><div class="vehicle-code mp-code">LI</div><br>Life Insurance Contracts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="section-header"><td colspan="13">Characteristics</td></tr>
+
+    <tr class="data-row">
+      <td class="row-label">Investible assets</td>
+      <td class="cell am-group"><span class="text-cell">Restricted to transferable securities</span></td>
+      <td class="cell am-group"><span class="text-cell">Unrestricted assets</span></td>
+      <td class="cell am-group"><span class="text-cell">Unrestricted assets</span></td>
+      <td class="cell am-group"><span class="text-cell">Investment in risk capital</span></td>
+      <td class="cell am-group"><span class="text-cell">Unrestricted assets</span></td>
+      <td class="cell am-group"><span class="text-cell">Unrestricted assets</span></td>
+      <td class="cell am-group"><span class="text-cell">Investible assets defined by IORP Directive</span></td>
+      <td class="cell mp-group mp-first"><span class="text-cell">Holding a portfolio of investment assets</span></td>
+      <td class="cell mp-group"><span class="text-cell">Securitised assets</span></td>
+      <td class="cell mp-group"><span class="text-cell">Unrestricted</span></td>
+      <td class="cell mp-group"><span class="text-cell">Unrestricted</span></td>
+      <td class="cell mp-group"><span class="text-cell">Holding a portfolio of investment assets</span></td>
+    </tr>
+
+    <tr class="data-row">
+      <td class="row-label">Amount of regulation</td>
+      <td class="cell am-group"><span class="tick triple">✓✓✓</span></td>
+      <td class="cell am-group"><span class="tick double">✓✓</span></td>
+      <td class="cell am-group"><span class="tick">✓</span></td>
+      <td class="cell am-group"><span class="tick">✓</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="tick">✓</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="star">*</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="tick">✓</span></td>
+    </tr>
+
+    <tr class="data-row">
+      <td class="row-label">Target investor &amp; clients</td>
+      <td class="cell am-group"><span class="text-cell">All investors</span></td>
+      <td class="cell am-group"><span class="text-cell">All investors</span></td>
+      <td class="cell am-group"><span class="text-cell">Professional investors</span></td>
+      <td class="cell am-group"><span class="text-cell">Professional investors</span></td>
+      <td class="cell am-group"><span class="text-cell">Professional investors</span></td>
+      <td class="cell am-group"><span class="text-cell">Professional investors</span></td>
+      <td class="cell am-group"><span class="text-cell">Employees</span></td>
+      <td class="cell mp-group mp-first"><span class="text-cell">Natural and legal persons</span></td>
+      <td class="cell mp-group"><span class="text-cell">Natural and legal persons</span></td>
+      <td class="cell mp-group"><span class="text-cell">Natural and legal persons</span></td>
+      <td class="cell mp-group"><span class="text-cell">HNWI</span></td>
+      <td class="cell mp-group"><span class="text-cell">HNWI</span></td>
+    </tr>
+
+    <tr class="data-row">
+      <td class="row-label">Cross-border passporting</td>
+      <td class="cell am-group"><span class="text-cell">EU Passport</span></td>
+      <td class="cell am-group"><span class="text-cell">National rules</span></td>
+      <td class="cell am-group"><span class="text-cell small">EU Passport (if AIFM)</span></td>
+      <td class="cell am-group"><span class="text-cell small">EU Passport (if AIFM)</span></td>
+      <td class="cell am-group"><span class="text-cell small">EU Passport (if AIFM)</span></td>
+      <td class="cell am-group"><span class="text-cell small">EU Passport (if AIFM)</span></td>
+      <td class="cell am-group"><span class="text-cell small">EU Passport via employer scheme</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="text-cell small">EU Freedom to Provide Services</span></td>
+    </tr>
+
+    <tr class="section-header"><td colspan="13">Typical Industries</td></tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Fund industry</td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Alternative funds</td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Real estate</td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Private equity</td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Wealth management</td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="dot"></span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="dot mp"></span></td>
+      <td class="cell mp-group"><span class="dot mp"></span></td>
+      <td class="cell mp-group"><span class="dot mp"></span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Multi-purpose</td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell mp-group mp-first"><span class="dot mp"></span></td>
+      <td class="cell mp-group"><span class="dot mp"></span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+    </tr>
+
+    <tr class="data-row industry-row">
+      <td class="row-label">Other</td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="empty">—</span></td>
+      <td class="cell am-group"><span class="text-cell small">Multinationals</span></td>
+      <td class="cell mp-group mp-first"><span class="text-cell small">Financial holdings</span></td>
+      <td class="cell mp-group"><span class="text-cell small">Capital markets</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="empty">—</span></td>
+      <td class="cell mp-group"><span class="text-cell small">Insurance industry</span></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+<div class="page-footer">* Partial regulatory framework applies &nbsp;|&nbsp; HNWI = High Net Worth Individual &nbsp;|&nbsp; AIFM = Alternative Investment Fund Manager</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MOBILE CARDS
+══════════════════════════════════════════ -->
+<div class="mobile-view">
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">All vehicles</button>
+    <button class="filter-btn" onclick="filterCards('am', this)">Asset Mgmt</button>
+    <button class="filter-btn" onclick="filterCards('mp', this)">Multi-Purpose</button>
+    <button class="filter-btn" onclick="filterCards('wealth', this)">Wealth Mgmt</button>
+    <button class="filter-btn" onclick="filterCards('funds', this)">Funds</button>
+  </div>
+
+  <div class="mobile-group-title am">Asset Management Vehicles</div>
+
+  <!-- UCITS -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">UCITS</span>
+        <div><div class="card-title">UCITS</div><div class="card-subtitle">Undertaking for Collective Investments in Transferable Securities</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Restricted to transferable securities</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓✓✓</span> High</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">All investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Fund industry</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- UCI Part II -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">UCI II</span>
+        <div><div class="card-title">UCI Part II</div><div class="card-subtitle">Non-EU UCITS</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓✓</span> Medium</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">All investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">National rules</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Fund industry</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- SIF -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">SIF</span>
+        <div><div class="card-title">SIF</div><div class="card-subtitle">Specialised Investment Fund</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- SICAR -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">SICAR</span>
+        <div><div class="card-title">SICAR</div><div class="card-subtitle">Société d'Investissement en Capital à Risque</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Investment in risk capital</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- RAIF -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">RAIF</span>
+        <div><div class="card-title">RAIF</div><div class="card-subtitle">Reserved Alternative Investment Fund</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None (AIFM regulated)</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- SCS & SCSp -->
+  <div class="vehicle-card am" data-groups="am wealth funds all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">SCS/SCSp</span>
+        <div><div class="card-title">SCS &amp; SCSp</div><div class="card-subtitle">Limited Partnership (incl. special limited partnerships)</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None (AIFM regulated)</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- IORP -->
+  <div class="vehicle-card am" data-groups="am all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code">IORP</span>
+        <div><div class="card-title">IORP</div><div class="card-subtitle">Pension Fund Vehicle</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Investible assets defined by IORP Directive</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Employees</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport via employer scheme</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Multinationals</span></div></div>
+    </div>
+  </div>
+
+  <div class="mobile-group-title mp">Multi-Purpose Vehicles</div>
+
+  <!-- SOPARFI -->
+  <div class="vehicle-card mp" data-groups="mp all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code mp">SOPARFI</span>
+        <div><div class="card-title">SOPARFI</div><div class="card-subtitle">Financial Holding Company</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Holding a portfolio of investment assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Multi-purpose</span><span class="industry-tag mp">Financial holdings</span></div></div>
+    </div>
+  </div>
+
+  <!-- Securitisation -->
+  <div class="vehicle-card mp" data-groups="mp all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code mp">Sec.</span>
+        <div><div class="card-title">Securitisation Vehicle &amp; Fund</div><div class="card-subtitle">Vehicle &amp; Fund</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Securitised assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="star">*</span> Partial</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Multi-purpose</span><span class="industry-tag mp">Capital markets</span></div></div>
+    </div>
+  </div>
+
+  <!-- Fiduciary -->
+  <div class="vehicle-card mp" data-groups="mp wealth all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code mp">Fid.</span>
+        <div><div class="card-title">Fiduciary Contracts</div><div class="card-subtitle">Fiduciary vehicle</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- SPF -->
+  <div class="vehicle-card mp" data-groups="mp wealth all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code mp">SPF</span>
+        <div><div class="card-title">SPF</div><div class="card-subtitle">Family Wealth Management Company</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">HNWI</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span></div></div>
+    </div>
+  </div>
+
+  <!-- Life Insurance -->
+  <div class="vehicle-card mp" data-groups="mp wealth all">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header-left">
+        <span class="card-code mp">LI</span>
+        <div><div class="card-title">Life Insurance Contracts</div><div class="card-subtitle">Insurance-based vehicle</div></div>
+      </div>
+      <span class="card-chevron">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="card-section-head">Characteristics</div>
+      <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Holding a portfolio of investment assets</div></div>
+      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
+      <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">HNWI</div></div>
+      <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Freedom to Provide Services</div></div>
+      <div class="card-section-head">Typical Industries</div>
+      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span><span class="industry-tag mp">Insurance industry</span></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer" style="margin-top:16px; border-radius:8px;">
+    * Partial regulatory framework &nbsp;|&nbsp; HNWI = High Net Worth Individual
+  </div>
+
+</div>
+
+<script>
+  function toggleCard(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.card-chevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
+  function filterCards(group, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.vehicle-card').forEach(card => {
+      const groups = card.dataset.groups || '';
+      card.style.display = groups.includes(group) ? '' : 'none';
+    });
+    // Show/hide group titles
+    document.querySelectorAll('.mobile-group-title').forEach(t => {
+      t.style.display = (group === 'all') ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
