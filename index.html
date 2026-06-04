@@ -105,12 +105,12 @@
   }
   .group-am { background: var(--blue); }
   .group-mp { background: #8a6a1a; }
-  .group-spacer { background: transparent; width: 140px; }
+  .group-spacer { background: transparent; width: 120px; }
 
   thead tr.vehicle-row th {
     padding: 8px 6px 6px;
-    text-align: center;
-    vertical-align: bottom;
+    text-align: left;
+    vertical-align: top;
     border-bottom: 2px solid var(--border);
     font-size: 10.5px;
     font-weight: 600;
@@ -120,8 +120,8 @@
   }
   thead tr.vehicle-row th.row-label-header {
     text-align: left;
-    width: 140px;
-    min-width: 140px;
+    width: 120px;
+    min-width: 120px;
     font-size: 10px;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -169,10 +169,11 @@
     font-size: 11px;
     font-weight: 600;
     color: var(--blue);
-    padding: 9px 8px 9px 0;
-    white-space: nowrap;
+    padding: 9px 8px 9px 8px;
+    white-space: normal;
     vertical-align: top;
-    width: 140px;
+    width: 120px;
+    min-width: 120px;
   }
 
   td.cell {
@@ -440,23 +441,7 @@
     </tr>
 
     <tr class="data-row">
-      <td class="row-label">Amount of regulation</td>
-      <td class="cell am-group"><span class="tick triple">✓✓✓</span></td>
-      <td class="cell am-group"><span class="tick double">✓✓</span></td>
-      <td class="cell am-group"><span class="tick">✓</span></td>
-      <td class="cell am-group"><span class="tick">✓</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="tick">✓</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="star">*</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="tick">✓</span></td>
-    </tr>
-
-    <tr class="data-row">
-      <td class="row-label">Target investor &amp; clients</td>
+      <td class="row-label">Target investor<br>&amp; clients</td>
       <td class="cell am-group"><span class="text-cell">All investors</span></td>
       <td class="cell am-group"><span class="text-cell">All investors</span></td>
       <td class="cell am-group"><span class="text-cell">Professional investors</span></td>
@@ -472,7 +457,7 @@
     </tr>
 
     <tr class="data-row">
-      <td class="row-label">Cross-border passporting</td>
+      <td class="row-label">Cross-border<br>passporting</td>
       <td class="cell am-group"><span class="text-cell">EU Passport</span></td>
       <td class="cell am-group"><span class="text-cell">National rules</span></td>
       <td class="cell am-group"><span class="text-cell small">EU Passport (if AIFM)</span></td>
@@ -487,124 +472,10 @@
       <td class="cell mp-group"><span class="text-cell small">EU Freedom to Provide Services</span></td>
     </tr>
 
-    <tr class="section-header"><td colspan="13">Typical Industries</td></tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Fund industry</td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Alternative funds</td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Real estate</td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Private equity</td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Wealth management</td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="dot"></span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="dot mp"></span></td>
-      <td class="cell mp-group"><span class="dot mp"></span></td>
-      <td class="cell mp-group"><span class="dot mp"></span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Multi-purpose</td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell mp-group mp-first"><span class="dot mp"></span></td>
-      <td class="cell mp-group"><span class="dot mp"></span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-    </tr>
-
-    <tr class="data-row industry-row">
-      <td class="row-label">Other</td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="empty">—</span></td>
-      <td class="cell am-group"><span class="text-cell small">Multinationals</span></td>
-      <td class="cell mp-group mp-first"><span class="text-cell small">Financial holdings</span></td>
-      <td class="cell mp-group"><span class="text-cell small">Capital markets</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="empty">—</span></td>
-      <td class="cell mp-group"><span class="text-cell small">Insurance industry</span></td>
-    </tr>
-
   </tbody>
 </table>
 </div>
-<div class="page-footer">* Partial regulatory framework applies &nbsp;|&nbsp; HNWI = High Net Worth Individual &nbsp;|&nbsp; AIFM = Alternative Investment Fund Manager</div>
+<div class="page-footer">HNWI = High Net Worth Individual &nbsp;|&nbsp; AIFM = Alternative Investment Fund Manager</div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -616,8 +487,6 @@
     <button class="filter-btn active" onclick="filterCards('all', this)">All vehicles</button>
     <button class="filter-btn" onclick="filterCards('am', this)">Asset Mgmt</button>
     <button class="filter-btn" onclick="filterCards('mp', this)">Multi-Purpose</button>
-    <button class="filter-btn" onclick="filterCards('wealth', this)">Wealth Mgmt</button>
-    <button class="filter-btn" onclick="filterCards('funds', this)">Funds</button>
   </div>
 
   <div class="mobile-group-title am">Asset Management Vehicles</div>
@@ -634,16 +503,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Restricted to transferable securities</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓✓✓</span> High</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">All investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Fund industry</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- UCI Part II -->
-  <div class="vehicle-card am" data-groups="am wealth funds all">
+  <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code">UCI II</span>
@@ -654,16 +520,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓✓</span> Medium</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">All investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">National rules</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Fund industry</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- SIF -->
-  <div class="vehicle-card am" data-groups="am wealth funds all">
+  <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code">SIF</span>
@@ -674,16 +537,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- SICAR -->
-  <div class="vehicle-card am" data-groups="am wealth funds all">
+  <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code">SICAR</span>
@@ -694,16 +554,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Investment in risk capital</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- RAIF -->
-  <div class="vehicle-card am" data-groups="am wealth funds all">
+  <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code">RAIF</span>
@@ -714,16 +571,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None (AIFM regulated)</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- SCS & SCSp -->
-  <div class="vehicle-card am" data-groups="am wealth funds all">
+  <div class="vehicle-card am" data-groups="am all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code">SCS/SCSp</span>
@@ -734,11 +588,8 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None (AIFM regulated)</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Professional investors</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport (if AIFM)</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Alternative funds</span><span class="industry-tag">Real estate</span><span class="industry-tag">Wealth management</span></div></div>
     </div>
   </div>
 
@@ -754,11 +605,8 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Investible assets defined by IORP Directive</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Employees</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Passport via employer scheme</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag">Multinationals</span></div></div>
     </div>
   </div>
 
@@ -776,11 +624,8 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Holding a portfolio of investment assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Multi-purpose</span><span class="industry-tag mp">Financial holdings</span></div></div>
     </div>
   </div>
 
@@ -796,16 +641,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Securitised assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="star">*</span> Partial</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Multi-purpose</span><span class="industry-tag mp">Capital markets</span></div></div>
     </div>
   </div>
 
   <!-- Fiduciary -->
-  <div class="vehicle-card mp" data-groups="mp wealth all">
+  <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code mp">Fid.</span>
@@ -816,16 +658,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">Natural and legal persons</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- SPF -->
-  <div class="vehicle-card mp" data-groups="mp wealth all">
+  <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code mp">SPF</span>
@@ -836,16 +675,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Unrestricted</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value">None</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">HNWI</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">—</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span></div></div>
     </div>
   </div>
 
   <!-- Life Insurance -->
-  <div class="vehicle-card mp" data-groups="mp wealth all">
+  <div class="vehicle-card mp" data-groups="mp all">
     <div class="card-header" onclick="toggleCard(this)">
       <div class="card-header-left">
         <span class="card-code mp">LI</span>
@@ -856,16 +692,13 @@
     <div class="card-body">
       <div class="card-section-head">Characteristics</div>
       <div class="card-row"><div class="card-row-label">Investible assets</div><div class="card-row-value">Holding a portfolio of investment assets</div></div>
-      <div class="card-row"><div class="card-row-label">Regulation</div><div class="card-row-value"><span class="tick">✓</span> Light</div></div>
       <div class="card-row"><div class="card-row-label">Target investors</div><div class="card-row-value">HNWI</div></div>
       <div class="card-row"><div class="card-row-label">Passporting</div><div class="card-row-value">EU Freedom to Provide Services</div></div>
-      <div class="card-section-head">Typical Industries</div>
-      <div class="card-row"><div class="card-row-label">Industries</div><div class="card-row-value"><span class="industry-tag mp">Wealth management</span><span class="industry-tag mp">Insurance industry</span></div></div>
     </div>
   </div>
 
   <div class="page-footer" style="margin-top:16px; border-radius:8px;">
-    * Partial regulatory framework &nbsp;|&nbsp; HNWI = High Net Worth Individual
+    HNWI = High Net Worth Individual &nbsp;|&nbsp; AIFM = Alternative Investment Fund Manager
   </div>
 
 </div>
